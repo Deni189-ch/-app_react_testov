@@ -6,6 +6,7 @@ import 'antd/dist/antd.css';
 import {Button} from 'antd';
 // отдельный юзер (пользователь)
 
+ 
 let User = ({users, followingInProgress, unfollow, follow}) => {
     return (
         <div>

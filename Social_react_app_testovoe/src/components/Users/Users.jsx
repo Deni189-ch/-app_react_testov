@@ -1,8 +1,9 @@
-import React from 'react';
+import React from 'react'
 import Paginator from "../common/Paginator/paginator";
 import User from "./User";
 //<Paginator/> отрисовка нумерации юзеров, с.к.
 //<User/> отрисовка одного юзера(пользователя, с.к.
+
 
 let Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}) => {
     return <div>

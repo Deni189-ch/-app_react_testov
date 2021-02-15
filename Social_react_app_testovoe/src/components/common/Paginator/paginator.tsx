@@ -2,15 +2,21 @@ import React, {useState} from 'react';
 import styles from "./Paginator.module.css";
 import 'antd/dist/antd.css';
 import {CaretLeftOutlined,  CaretRightOutlined} from "@ant-design/icons";
-import { Button     } from 'antd';
+import { Button } from 'antd';
 
 //отрисовка нумерации юзеров
-
-const Paginator = ({totalUsersCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
+type PropsType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (pageNamber: number) => void
+    portionSize?: number
+}
+const Paginator: React.FC <PropsType & { className: string }> = ({totalUsersCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
     //pagesCount общее число пользователей, pageSize размер стр.
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
 
-    const pages = [];
+    const pages: Array<number> = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
@@ -36,7 +42,7 @@ const Paginator = ({totalUsersCount, pageSize, currentPage, onPageChanged, porti
         {pages
             .filter(p => p >= leftPortionNumber && p <= rightPortionNumber)
             .map(p => {
-                return <span key={p} className={currentPage === p && styles.selectedPage}
+                return <span key={p} className={currentPage === p ? styles.selectedPage : ""}
                              onClick={(e) => {
                                  onPageChanged(p);
                              }}>{p} </span>
