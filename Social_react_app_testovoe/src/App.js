@@ -1,27 +1,23 @@
 import React from 'react';
-import './App.css';
-import {BrowserRouter, Route, withRouter, Redirect, Switch, NavLink} from "react-router-dom";
-import LogOutContainer from "./components/LogOut/LogOutContainer";
-import LoginPage from "./components/Login/Login";
-import {connect, Provider} from "react-redux";
 import {compose} from "redux";
-import {initializApp} from "./redux/app-reducer";
 import store from "./redux/redux-store";
-import {withSuspense} from "./hoc/withSuspense";
-import UsersContainer from "./components/Users/UsersContainer";
-//Ant Design
-import { Spin } from 'antd';
-import { Layout, Menu } from 'antd';
-import {
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
-} from '@ant-design/icons';
-import 'antd/dist/antd.css';
-const { Header, Sider, Content } = Layout;
+import {connect, Provider} from "react-redux";
+import {BrowserRouter, Route, Redirect, withRouter, Switch, NavLink} from "react-router-dom";
 
+import LogOutContainer from "./components/LogOut/LogOutContainer";
+import UsersContainer from "./components/Users/UsersContainer";
+import LoginPage from "./components/Login/Login";
+import {initializApp} from "./redux/app-reducer";
+import {withSuspense} from "./hoc/withSuspense";
+
+import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined, VideoCameraOutlined, UploadOutlined, } from '@ant-design/icons';
+import { Layout, Menu, Spin } from 'antd';
+
+import 'antd/dist/antd.css';
+import './App.css';
+
+
+const { Header, Sider, Content } = Layout;
 
 //<Route path='/profile/:userId?' userId- номер id пользователя.
 
@@ -61,7 +57,6 @@ class App extends React.Component {
     }
     componentWillUnmount() {
         window.removeEventListener('unhandledRejection', this.catchAllUnhandledErrors);
-
     }
 
     render() {
@@ -114,6 +109,7 @@ class App extends React.Component {
 
                             <Route exact path='/'
                                    render={() => <Redirect from='/' to='/profile'/>}/>
+
                             <Route path='*'
                                    render={() => <div>404 NOT FOUND</div>}/>
                         </Switch>
@@ -132,7 +128,7 @@ let AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {initializApp}))(App);
 
-const MainApp = (props) => {
+const MainApp = () => {
     return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>

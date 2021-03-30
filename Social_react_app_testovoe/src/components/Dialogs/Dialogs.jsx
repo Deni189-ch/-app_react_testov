@@ -1,17 +1,20 @@
 import React from 'react';
-import s from './Dialogs.module.css';
-import DialogItem from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
 import {Redirect} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
-import {Textarea} from "../common/FormsControls/FormsControls";
+
 import {MaxLengthCreator, required} from "../../utils/validator/Validarors";
+import {Textarea} from "../common/FormsControls/FormsControls";
+import DialogItem from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
+
+import css from './Dialogs.module.css';
+
 
 const maxLength = MaxLengthCreator(30)
-const AddMessageForm = (props) => {
+const AddMessageForm = ({handleSubmit}) => {
 
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field placeholder='Enter your message'
                        component={Textarea}
@@ -26,28 +29,28 @@ const AddMessageForm = (props) => {
     )
 };
 
-const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm)
+const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm);
 
 
-const Dialogs = (props) => {
+const Dialogs = ({dialogsPage, isAuth, sendMessage}) => {
 
-    let state = props.dialogsPage;
+    let state = dialogsPage;
 
-    let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>);
-    let messagesElements = state.messages.map(m => <Message message={m.message} key={m.id}/>);
+    let dialogsElements = state.dialogs.map(({id, name}) => <DialogItem name={name} key={id} id={id}/>);
+    let messagesElements = state.messages.map(({id, message}) => <Message message={message} key={id}/>);
 
-    if (!props.isAuth) return <Redirect to={"/login"}/>;
+    if (!isAuth) return <Redirect to={"/login"}/>;
 
     const onSendMessage = (formData) => {
-        props.sendMessage(formData.newMessageBody);
+        sendMessage(formData.newMessageBody);
     }
 
     return (
-        <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
+        <div className={css.dialogs}>
+            <div className={css.dialogsItems}>
                 {dialogsElements}
             </div>
-            <div className={s.messages}>
+            <div className={css.messages}>
                 <div>{messagesElements}</div>
 
                 <AddMessageFormRedux  onSubmit={onSendMessage} />

@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import styles from "./Paginator.module.css";
-import 'antd/dist/antd.css';
+import React from 'react';
+
 import {CaretLeftOutlined,  CaretRightOutlined} from "@ant-design/icons";
 import { Button } from 'antd';
+import styles from "./Paginator.module.css";
 
 //отрисовка нумерации юзеров
 type PropsType = {
@@ -23,7 +23,7 @@ const Paginator: React.FC <PropsType & { className: string }> = ({totalUsersCoun
 
     //кол-во блоков вывода страниц.
     const portionCount = Math.ceil(pagesCount / portionSize)
-    const [portionNumber, setPortionNumber] = useState(1)
+    const [portionNumber, setPortionNumber] = React.useState(1)
     //левая граница вывода.
     const leftPortionNumber = (portionNumber - 1) * portionSize + 1;
     //правая граница вывода.

@@ -1,6 +1,7 @@
 import React from 'react';
-import {CreateField, Input, Textarea} from "../../common/FormsControls/FormsControls";
 import {reduxForm} from "redux-form";
+
+import {CreateField, Input, Textarea} from "../../common/FormsControls/FormsControls";
 import css from "../../common/FormsControls/FormsControls.module.css";
 //CreateField возвращает Field с.к.
 
@@ -38,6 +39,6 @@ const ProfileDataForm = ({handleSubmit, profile, error}) => {
     </form>
 }
 
-const ProfileDataFormReduxForm = reduxForm({form: 'edit-profile'})(ProfileDataForm)
+const ProfileDataFormReduxForm = reduxForm({form: 'edit-profile'})(ProfileDataForm);
 
 export default ProfileDataFormReduxForm;

@@ -1,12 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {
-    follow,
-    setCurrentPage,
-    unfollow, toggleFollowingProgress, getUsers
-} from '../../redux/users-reducer';
-import Users from './Users';
 import {compose} from "redux";
+import {connect} from 'react-redux';
+import {follow,unfollow, getUsers} from '../../redux/users-reducer';
+import Users from './Users';
 import {
     getUsersPage,
     getCurrentPage,
@@ -15,11 +11,12 @@ import {
     getFollowingInProgress,
     getIsFetching
 } from "../../redux/users-selectors";
-import { Spin } from 'antd';
-import 'antd/dist/antd.css';
+
 import { UserType } from '../../types/types';
 import { AppStateType } from '../../redux/redux-store';
-     
+import { Spin } from 'antd';
+
+
 type MapStatePropsType = {
     pageSize: number
     currentPage: number

@@ -1,10 +1,10 @@
 import React from 'react';
-import css from './Login.module.css'
 import {connect} from "react-redux";
-import {loginAuthUserData} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
-import 'antd/dist/antd.css';
+import {loginAuthUserData} from "../../redux/auth-reducer";
+
 import { Form, Input, Button, Checkbox } from 'antd';
+import css from './Login.module.css'
 
 //разметка полей login and email
 const layout = {
@@ -23,14 +23,14 @@ const tailLayout = {
     },
 };
 
-const Login = (props) => {
+const Login = ({isAuth, loginAuthUserData, captchaUrl }) => {
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={'/profile'}/>
     }
 
     const onFinish = (values) => {
-        props.loginAuthUserData(values.email, values.password, values.rememberMe, values.captcha);
+        loginAuthUserData(values.email, values.password, values.rememberMe, values.captcha);
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -73,13 +73,13 @@ const Login = (props) => {
                 <Input.Password />
             </Form.Item>
 
-            { props.captchaUrl &&
+            {captchaUrl &&
             <Form.Item  {...tailLayout} >
-                <img alt='...loading captcha' src={props.captchaUrl} className={css.img} />
+                <img alt='...loading captcha' src={captchaUrl} className={css.img} />
             </Form.Item>
             }
 
-            { props.captchaUrl &&
+            {captchaUrl &&
             <Form.Item  {...tailLayout} name="captcha">
                 <Input/>
             </Form.Item>

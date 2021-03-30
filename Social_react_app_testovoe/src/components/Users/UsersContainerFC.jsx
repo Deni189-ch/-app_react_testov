@@ -1,12 +1,11 @@
 import React,{useEffect} from 'react';
 import {connect} from 'react-redux';
+import {compose} from "redux";
 import {
     follow,
     setCurrentPage,
     unfollow, toggleFollowingProgress, getUsers
 } from '../../redux/users-reducer';
-import Users from './Users';
-import {compose} from "redux";
 import {
     getUsersPage,
     getCurrentPage,
@@ -15,30 +14,29 @@ import {
     getFollowingInProgress,
     getIsFetching
 } from "../../redux/users-selectors";
-import {Spin} from "antd";
-import { Spin } from 'antd';
-import 'antd/dist/antd.css';
 
-const UsersContainerFC = (props) => {
+import Users from './Users';
+import {Spin} from "antd";
+
+
+const UsersContainerFC = ({getUsers, currentPage, pageSize, totalUsersCount, users, followingInProgress }) => {
     useEffect(() => {
-        const {currentPage, pageSize} = props;
-        props.getUsers(currentPage, pageSize);
+       getUsers(currentPage, pageSize);
     }, [])
     const onPageChanged = (pageNumber) => {
-        const {pageSize} = props;
-        props.getUsers(pageNumber, pageSize);
+        getUsers(pageNumber, pageSize);
     }
     return (
         <>
             {this.props.isFetching ? <Spin /> : null}
-            <Users totalUsersCount={props.totalUsersCount}
-                   pageSize={props.pageSize}
-                   currentPage={props.currentPage}
+            <Users totalUsersCount={totalUsersCount}
+                   pageSize={pageSize}
+                   currentPage={currentPage}
                    onPageChanged={onPageChanged}
-                   users={props.users}
-                   follow={props.follow}
-                   unfollow={props.unfollow}
-                   followingInProgress={props.followingInProgress}
+                   users={users}
+                   follow={follow}
+                   unfollow={unfollow}
+                   followingInProgress={followingInProgress}
             />
         </>
     )
@@ -57,4 +55,4 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers})
-)(UsersContainerFC)
+)(UsersContainerFC);

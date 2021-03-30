@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
-import css from './ProfileInfo.module.css';
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import ProfileDataForm from "./ProfileDataForm";
-import logo from '../../../assets/images/user.png'
-import {Image} from 'antd';
-import 'antd/dist/antd.css';
-import {Radio} from 'antd';
-import { Spin } from 'antd';
-import 'antd/dist/antd.css';
+import logo from '../../../assets/images/user.png';
+
+import {Image, Radio, Spin} from 'antd';
+import css from './ProfileInfo.module.css';
+
 
 const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
 

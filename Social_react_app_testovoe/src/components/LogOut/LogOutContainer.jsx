@@ -1,6 +1,7 @@
 import React from 'react';
-import LogOut from "./LogOut";
 import {connect} from "react-redux";
+
+import LogOut from "./LogOut";
 import {logOut} from "../../redux/auth-reducer";
 
 class LogOutContainer extends React.Component {
