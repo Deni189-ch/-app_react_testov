@@ -11,7 +11,13 @@ import css from './Dialogs.module.css';
 
 
 const maxLength = MaxLengthCreator(30)
-const AddMessageForm = ({handleSubmit}) => {
+
+type AddMessageFormType = {
+    handleSubmit: any
+
+}
+
+const AddMessageForm: React.FC<AddMessageFormType> = ({handleSubmit}) => {
 
     return (
         <form onSubmit={handleSubmit}>
@@ -31,17 +37,21 @@ const AddMessageForm = ({handleSubmit}) => {
 
 const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm);
 
-
-const Dialogs = ({dialogsPage, isAuth, sendMessage}) => {
+type DialogsType = {
+    dialogsPage: any,
+    isAuth: boolean,
+    sendMessage: (body: any) => void
+}
+const Dialogs: React.FC<DialogsType> = ({dialogsPage, isAuth, sendMessage}) => {
 
     let state = dialogsPage;
 
-    let dialogsElements = state.dialogs.map(({id, name}) => <DialogItem name={name} key={id} id={id}/>);
-    let messagesElements = state.messages.map(({id, message}) => <Message message={message} key={id}/>);
+    let dialogsElements = state.dialogs.map(({id, name}:any) => <DialogItem name={name} key={id} id={id}/>);
+    let messagesElements = state.messages.map(({id, message}:any) => <Message message={message} key={id}/>);
 
     if (!isAuth) return <Redirect to={"/login"}/>;
 
-    const onSendMessage = (formData) => {
+    const onSendMessage = (formData: any) => {
         sendMessage(formData.newMessageBody);
     }
 

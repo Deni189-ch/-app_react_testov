@@ -23,7 +23,7 @@ const Paginator: React.FC <PropsType & { className: string }> = ({totalUsersCoun
 
     //кол-во блоков вывода страниц.
     const portionCount = Math.ceil(pagesCount / portionSize)
-    const [portionNumber, setPortionNumber] = React.useState(1)
+    const [portionNumber, setPortionNumber] = React.useState<number>(1)
     //левая граница вывода.
     const leftPortionNumber = (portionNumber - 1) * portionSize + 1;
     //правая граница вывода.

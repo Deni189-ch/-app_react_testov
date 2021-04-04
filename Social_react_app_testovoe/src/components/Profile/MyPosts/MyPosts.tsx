@@ -7,13 +7,16 @@ import Post from './Post/Post';
 
 import css from './MyPosts.module.css';
 
-
-const MyPosts = React.memo(({posts, addPost,  }) => {
+type MyPostsType = {
+    posts: any
+    addPost: any
+}
+const MyPosts: React.FC<MyPostsType> = React.memo(({ posts, addPost }) => {
     let pro  =[...posts]
     let postsElements =
         pro.reverse().map(({id, message, likesCount}) => <Post key={id} message={message} likesCount={likesCount}/>);
 
-    let onAddPost = (formaData) => {
+    let onAddPost = (formaData: any) => {
         addPost(formaData.newPostText);
     }
 
@@ -31,7 +34,11 @@ const MyPosts = React.memo(({posts, addPost,  }) => {
 })
 
 const maxLength = MaxLengthCreator(10)
-const AddPostForm = ({handleSubmit}) => {
+
+type AddPostFormType = {
+    handleSubmit: any
+}
+const AddPostForm: React.FC<AddPostFormType> = ({ handleSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit}>

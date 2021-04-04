@@ -3,7 +3,12 @@ import logo from '../../../../assets/images/user.png';
 
 import css from './Post.module.css';
 
-const Post = ({message, likesCount}) => {
+type PostType = {
+  message: string
+  likesCount: number
+}
+
+const Post: React.FC<PostType> = ({message, likesCount}) => {
   return (
     <div className={css.item}>
         <img alt="img Loading..." src={logo} />

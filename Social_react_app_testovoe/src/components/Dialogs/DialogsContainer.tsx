@@ -7,15 +7,15 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import Dialogs from "./Dialogs";
 
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: any) => {
     return {
         dialogsPage: state.dialogsPage
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = (dispatch: any) => {
     return {
-        sendMessage: (body) => {
+        sendMessage: (body: any) => {
             dispatch(sendMessageCreator(body));
         }
     }

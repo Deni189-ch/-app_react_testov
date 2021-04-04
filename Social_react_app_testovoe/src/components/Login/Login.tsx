@@ -23,17 +23,22 @@ const tailLayout = {
     },
 };
 
-const Login = ({isAuth, loginAuthUserData, captchaUrl }) => {
+type LoginType = {
+    isAuth: boolean
+    loginAuthUserData: any
+    captchaUrl: string | null
+}
+const Login: React.FC<LoginType> = ({isAuth, loginAuthUserData, captchaUrl }) => {
 
     if (isAuth) {
         return <Redirect to={'/profile'}/>
     }
 
-    const onFinish = (values) => {
-        loginAuthUserData(values.email, values.password, values.rememberMe, values.captcha);
+    const onFinish = ({email, password, rememberMe, captcha}:any) => {
+        loginAuthUserData(email, password, rememberMe, captcha);
     };
 
-    const onFinishFailed = (errorInfo) => {
+    const onFinishFailed = (errorInfo: any) => {
         console.log('Failed/login:', errorInfo);
     };
 
@@ -98,7 +103,7 @@ const Login = ({isAuth, loginAuthUserData, captchaUrl }) => {
     </div>
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
     isAuth: state.auth.isAuth,
     captchaUrl: state.auth.captchaUrl
 
